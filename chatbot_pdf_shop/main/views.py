@@ -317,7 +317,6 @@ def analyze_layout(request):
         logging.error(f"Error occurred: {e} Container: {os.getenv('BLOB_UPLOADS_CONTAINER_NAME')}")
         return JsonResponse({"status": "error", "message": f"Error occurred: {str(e)}"}, status=500)
 
-
 def save(document):
     data.append(document.to_dict())
     save_to_json()
@@ -392,10 +391,9 @@ def send_message(request):
             top_intent = result["result"]["prediction"]["topIntent"]
             entities = result["result"]["prediction"].get("entities", [])
 
-            print(f"Top Intent: {top_intent}")
-            print(f"Entities: {entities}")
+            filtered_data = filter_json(result["result"]["prediction"]["entities"])
 
-            return JsonResponse(result)
+            return JsonResponse({"filtered_data": filtered_data}, safe=False)
 
         else:
             return JsonResponse({"error": "Unexpected response structure."}, status=500)
@@ -403,6 +401,52 @@ def send_message(request):
     except Exception as ex:
         print(f"An error occurred: {ex}")
         return JsonResponse({"error": str(ex)}, status=500)
+
+def filter_json(json_filters):
+    # Initialize filter variables
+    cpu = ""
+    gpu = ""
+    ram = ""
+    storage = ""
+    disk_type = ""
+    disk_interface = ""
+
+    # Extract filter values from json_filters
+    for json_filter in json_filters:
+        if isinstance(json_filter, dict):  # Ensure json_filter is a dictionary
+            category = json_filter.get("category")
+            if category == "CPU":
+                cpu = json_filter.get("text", "")
+            elif category == "GPU":
+                gpu = json_filter.get("text", "")
+            elif category == "RAM":
+                ram = json_filter.get("text", "").replace("GB", "")
+            elif category == "Storage":
+                storage = json_filter.get("text", "").replace("GB", "").replace("TB", "")
+            elif category == "DiskType":
+                disk_type = json_filter.get("text", "")
+            elif category == "DiskInterface":
+                disk_interface = json_filter.get("text", "")
+            print(f"{json_filter}")
+            print(f"{cpu}, {gpu}, {ram}, {storage}, {disk_type}, {disk_interface}")
+        else:
+            print(f"Skipping invalid entry: {json_filter}")  # Debug message for non-dict entries
+
+    # Open and load the data from the file
+    with open("processed_data.json", "r", encoding="utf-8") as json_file:
+        data = json.load(json_file)  # Load JSON data
+
+        # Filter the data based on the conditions set by the filters
+        filtered_data = [item for item in data
+                 if (not cpu or (item.get("cpu_familia", "") and cpu.lower() in item.get("cpu_familia", "").lower())) and
+                    (not gpu or (item.get("gpu_modelo", "") and gpu.lower() in item.get("gpu_modelo", "").lower())) and
+                    (not ram or (item.get("ram_instalada", "") and ram.lower() in item.get("ram_instalada", "").lower())) and
+                    (not storage or (item.get("disco_capacidad", "") and storage.lower() in item.get("disco_capacidad", "").lower())) and
+                    (not disk_type or (item.get("disco_tipo_soporte", "") and disk_type.lower() in item.get("disco_tipo_soporte", "").lower())) and
+                    (not disk_interface or (item.get("disco_interfaz_soporte", "") and disk_interface.lower() in item.get("disco_interfaz_soporte", "").lower()))]
+
+
+    return filtered_data
 
 class Home(TemplateView):
     template_name="index.html"

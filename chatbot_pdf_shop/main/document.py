@@ -7,7 +7,7 @@ class Document:
         self.precio = precio
         self.garantia = garantia.replace("Garantía: ", "")
         self.disco_disco = disco_disco
-        self.disco_capacidad = disco_capacidad
+        self.disco_capacidad = disco_capacidad.replace(".", "")
         self.disco_tipo_soporte = disco_tipo_soporte
         self.disco_interfaz_soporte = disco_interfaz_soporte
         self.disco_velocidad_soporte = disco_velocidad_soporte
