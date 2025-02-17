@@ -410,7 +410,7 @@ def filter_json(json_filters):
     storage = ""
     disk_type = ""
     disk_interface = ""
-
+    null_cat = 0
     # Extract filter values from json_filters
     for json_filter in json_filters:
         if isinstance(json_filter, dict):  # Ensure json_filter is a dictionary
@@ -427,6 +427,7 @@ def filter_json(json_filters):
                 disk_type = json_filter.get("text", "")
             elif category == "DISK_INTERFACE":
                 disk_interface = json_filter.get("text", "")
+    
             print(f"{json_filter}")
             print(f"{cpu}, {gpu}, {ram}, {storage}, {disk_type}, {disk_interface}")
         else:
@@ -438,13 +439,12 @@ def filter_json(json_filters):
 
         # Filter the data based on the conditions set by the filters
         filtered_data = [item["codigo_producto"] for item in data
-                 if (not cpu or (item.get("cpu_familia", "") and cpu.lower() in item.get("cpu_familia", "").lower())) and
+                if (not cpu or (item.get("cpu_familia", "") and cpu.lower() in item.get("cpu_familia", "").lower())) and
                     (not gpu or (item.get("gpu_modelo", "") and gpu.lower() in item.get("gpu_modelo", "").lower())) and
                     (not ram or (item.get("ram_instalada", "") and ram.lower() in item.get("ram_instalada", "").lower())) and
                     (not storage or (item.get("disco_capacidad", "") and storage.lower() in item.get("disco_capacidad", "").lower())) and
                     (not disk_type or (item.get("disco_tipo_soporte", "") and disk_type.lower() in item.get("disco_tipo_soporte", "").lower())) and
                     (not disk_interface or (item.get("disco_interfaz_soporte", "") and disk_interface.lower() in item.get("disco_interfaz_soporte", "").lower()))]
-
 
     return filtered_data
 
