@@ -418,14 +418,14 @@ def filter_json(json_filters):
             if category == "CPU":
                 cpu = json_filter.get("text", "")
             elif category == "GPU":
-                gpu = json_filter.get("text", "")
+                gpu = json_filter.get("text", "").upper().replace("RTX", "")
             elif category == "RAM":
-                ram = json_filter.get("text", "").replace("GB", "")
+                ram = json_filter.get("text", "").upper().replace("GB", "")
             elif category == "Storage":
-                storage = json_filter.get("text", "").replace("GB", "").replace("TB", "")
-            elif category == "DiskType":
+                storage = json_filter.get("text", "").upper().replace("GB", "").replace("TB", "")
+            elif category == "DISK_TYPE":
                 disk_type = json_filter.get("text", "")
-            elif category == "DiskInterface":
+            elif category == "DISK_INTERFACE":
                 disk_interface = json_filter.get("text", "")
             print(f"{json_filter}")
             print(f"{cpu}, {gpu}, {ram}, {storage}, {disk_type}, {disk_interface}")
@@ -437,7 +437,7 @@ def filter_json(json_filters):
         data = json.load(json_file)  # Load JSON data
 
         # Filter the data based on the conditions set by the filters
-        filtered_data = [item for item in data
+        filtered_data = [item["codigo_producto"] for item in data
                  if (not cpu or (item.get("cpu_familia", "") and cpu.lower() in item.get("cpu_familia", "").lower())) and
                     (not gpu or (item.get("gpu_modelo", "") and gpu.lower() in item.get("gpu_modelo", "").lower())) and
                     (not ram or (item.get("ram_instalada", "") and ram.lower() in item.get("ram_instalada", "").lower())) and

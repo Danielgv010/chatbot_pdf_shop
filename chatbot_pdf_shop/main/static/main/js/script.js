@@ -18,7 +18,16 @@ function getResponse(inputValue) {
                 const systemMessage = document.createElement("div");
 
                 systemMessage.classList.add("message", "system");
-                systemMessage.innerHTML =  JSON.stringify(response);
+                console.log(response.filtered_data);
+                for (code in response.filtered_data) {
+                    productLink = document.createElement("a");
+                    productLink.innerHTML = response.filtered_data[code];
+                    productLink.href = `${URLDOMAIN}/inspect/${response.filtered_data[code]}`;
+                    systemMessage.appendChild(productLink);
+
+                    br = document.createElement("br");
+                    systemMessage.appendChild(br);
+                }
 
                 chatBox.appendChild(systemMessage);
 
