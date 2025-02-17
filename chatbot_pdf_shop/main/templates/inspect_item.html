@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Inspection - {{ item.producto }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/css/style_inspect_item.css' %}">
+    <script src="{% static 'main/js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>PC Shop</h1>
+            <a href="/" class="back-to-shop">Back to Shop</a>
+        </div>
+    </header>
+    
+    <main>
+        <section class="item-details-container">
+            <!-- Product Header Section -->
+            <div class="product-header">
+                <h2>{{ item.producto }}</h2>
+                <p class="price">{{ item.precio }}</p>
+            </div>
+
+            <!-- Product Overview Section -->
+            <div class="overview">
+                <h3>Overview</h3>
+                <p><strong>Company:</strong> {{ item.empresa|default:'Not specified' }}</p>
+                <p><strong>Product Code:</strong> {{ item.codigo_producto|default:'Not specified' }}</p>
+                <p><strong>Warranty:</strong> {{ item.garantia|default:'Not available' }}</p>
+            </div>
+
+            <!-- Product Specifications Section -->
+            <div class="specifications">
+                <h3>Specifications</h3>
+                <div class="spec-item">
+                    <strong>Disk Type:</strong> {{ item.disco_disco|default:'Not specified' }} - {{ item.disco_capacidad|default:'Not specified' }} {{ item.disco_tipo_soporte|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>GPU:</strong> {{ item.gpu_modelo|default:'Not specified' }} ({{ item.gpu_fabricante|default:'Not specified' }} - {{ item.gpu_memoria|default:'Not specified' }} MB)
+                </div>
+                <div class="spec-item">
+                    <strong>CPU:</strong> {{ item.cpu_familia|default:'Not specified' }} {{ item.cpu_modelo|default:'Not specified' }} ({{ item.cpu_frecuencia|default:'Not specified' }} - Turbo: {{ item.cpu_frecuencia_turbo|default:'Not specified' }})
+                </div>
+                <div class="spec-item">
+                    <strong>Screen Size:</strong> {{ item.pantalla_size|default:'Not specified' }} - Resolution: {{ item.pantalla_resolucion|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>Weight:</strong> {{ item.dimensiones_peso|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>Color:</strong> {{ item.general_color|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>Material:</strong> {{ item.general_material_chasis|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>Battery Life:</strong> {{ item.bateria_duracion|default:'Not specified' }}
+                </div>
+                <div class="spec-item">
+                    <strong>Webcam Resolution:</strong> {{ item.webcam_resolucion|default:'Not specified' }}
+                </div>
+            </div>
+
+            <!-- Additional Features Section -->
+            <div class="additional-features">
+                <h3>Additional Features</h3>
+                <p><strong>Touchscreen:</strong> {{ item.pantalla_tactil|default:'Not specified' }}</p>
+                <p><strong>Bluetooth Version:</strong> {{ item.conexiones_version_bluetooth|default:'Not specified' }}</p>
+                <p><strong>Operating System:</strong> {{ item.sistema_software_version_so|default:'Not specified' }}</p>
+                <p><strong>Keyboard Backlight:</strong> {{ item.teclado_retroiluminado|default:'Not specified' }}</p>
+                <p><strong>Audio:</strong> Integrated Microphone: {{ item.audio_microfono_integrado|default:'Not specified' }}</p>
+                <p><strong>Storage Technology:</strong> {{ item.disco_tipo_soporte|default:'Not specified' }} ({{ item.disco_capacidad|default:'Not specified' }} GB)</p>
+                <p><strong>Connectivity:</strong> {{ item.conexiones_wireless|default:'Not specified' }}</p>
+            </div>
+
+            <!-- Product Description Section -->
+            <div class="product-description">
+                <h3>Description</h3>
+                <p>{{ item.descripcion|default:'Not available' }}</p>
+            </div>
+
+            <!-- Customer Reviews Section -->
+            <div class="item-reviews">
+                <h3>Customer Reviews</h3>
+                {% for review in item.reviews %}
+                    <div class="review">
+                        <p><strong>{{ review.user }}:</strong> {{ review.comment }}</p>
+                        <p>Rating: {{ review.rating }} / 5</p>
+                    </div>
+                {% empty %}
+                    <p>No reviews yet. Be the first to leave a review!</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,163 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1e3a8a;
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #fff;
+    margin: 0;
+    font-size: 24px;
+    display: inline-block;
+}
+
+header .back-to-shop {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #4caf50;
+    padding: 8px 16px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+header .back-to-shop:hover {
+    background-color: #45a049;
+}
+
+/* Main Section */
+main {
+    padding: 40px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Item Details Container */
+.item-details-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+/* Product Header */
+.product-header h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-header .price {
+    font-size: 22px;
+    color: #2a9d8f;
+}
+
+/* Overview Section */
+.overview {
+    margin-bottom: 30px;
+}
+
+.overview h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.overview p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Specifications Section */
+.specifications {
+    margin-bottom: 30px;
+}
+
+.specifications h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.specifications .spec-item {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.specifications .spec-item strong {
+    color: #333;
+}
+
+/* Additional Features Section */
+.additional-features {
+    margin-bottom: 30px;
+}
+
+.additional-features h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.additional-features p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Product Description Section */
+.product-description {
+    margin-bottom: 30px;
+}
+
+.product-description h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-description p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Reviews Section */
+.item-reviews {
+    margin-top: 40px;
+}
+
+.item-reviews h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.review {
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.review p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.review strong {
+    color: #333;
+}
