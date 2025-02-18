@@ -3,11 +3,11 @@ class Document:
         self.empresa = empresa
         self.direccion_empresa = direccion_empresa
         self.producto = producto
-        self.codigo_producto = codigo_producto.replace("Código: ", "")
+        self.codigo_producto = codigo_producto.replace("Código: ", "") if codigo_producto else ""
         self.precio = precio
-        self.garantia = garantia.replace("Garantía: ", "")
+        self.garantia = garantia.replace("Garantía: ", "") if garantia else ""
         self.disco_disco = disco_disco
-        self.disco_capacidad = disco_capacidad.replace(".", "")
+        self.disco_capacidad = disco_capacidad.replace(".", "") if disco_capacidad else ""
         self.disco_tipo_soporte = disco_tipo_soporte
         self.disco_interfaz_soporte = disco_interfaz_soporte
         self.disco_velocidad_soporte = disco_velocidad_soporte

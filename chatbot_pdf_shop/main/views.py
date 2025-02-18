@@ -418,12 +418,12 @@ def filter_json(json_filters):
             if category == "CPU":
                 cpu = json_filter.get("text", "")
             elif category == "GPU":
-                gpu = json_filter.get("text", "").upper().replace("RTX", "")
+                gpu = json_filter.get("text", "").upper().replace("RTX", "") if json_filter.get("text") else ""
             elif category == "RAM":
-                ram = json_filter.get("text", "").upper().replace("GB", "")
+                ram = json_filter.get("text", "").upper().replace("GB", "") if json_filter.get("text") else ""
             elif category == "Storage":
-                storage = json_filter.get("text", "").upper().replace("GB", "").replace("TB", "")
-            elif category == "DISK_TYPE":
+                storage = json_filter.get("text", "").upper().replace("GB", "").replace("TB", "") if json_filter.get("text") else ""
+            elif category == "DISK_TYPE": 
                 disk_type = json_filter.get("text", "")
             elif category == "DISK_INTERFACE":
                 disk_interface = json_filter.get("text", "")
